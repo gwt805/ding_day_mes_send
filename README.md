@@ -1,2 +1,3 @@
-# ding_day_mes_send
-钉钉机器人每日消息推送
+<div align="center">
+    <img src="logo.png" width=200px height=200px>
+</div>
