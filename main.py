@@ -7,11 +7,17 @@ Markdown 字体颜色
 <font color="#660000">深红色文字</font>
 
 内容:
+    今天是 xxxx-xx-xx 星期x
     今日天气 : 多云
-    当前温度 : 34
-    <font color="#660000">洗脑</font>
+    当前温度 : xx℃
+    最低温   : xx℃
+    最高温   : xx℃
+    今日彩虹屁 : xxxxx
+    今日段子 : xxxx
+    <font color="#660000">xxxx</font>
 '''
 from dingtalkchatbot.chatbot import DingtalkChatbot
+from datetime import datetime, timedelta
 import requests
 import time
 import urllib
@@ -23,9 +29,12 @@ import os
 import re
 
 
-city = os.getenv('CITYS')
+city = os.getenv('CITYS') # 最少写2个城市
 webhook_url = os.getenv("WEBHOOK")
 qian_key = os.getenv("QIAN")
+
+nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
+today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d")  # 今天的日期
 
 
 def random_color():
@@ -47,6 +56,12 @@ def get_weather():
         weather_list.append({ct: [weather["weather"], weather["temp"],
                             weather["low"], weather["high"]]})  # 天气，温度， 最低温，最高温
     return weather_list
+
+
+def get_week_day():
+    week_list = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
+    week_day = week_list[datetime.date(today).weekday()]
+    return week_day
 
 
 def get_caihongpi():
@@ -77,9 +92,9 @@ def main():
     tmp = ""
     for t in get_weather():
         for k, v in t.items():
-            tmp += f"### {k}\n<font color={random_color()}>天气: {v[0]} &nbsp;&nbsp;&nbsp;&nbsp;温度: {v[1]}&nbsp;&nbsp;&nbsp;&nbsp;最低温: {v[2]}&nbsp;&nbsp;&nbsp;&nbsp;最高温: {v[3]}</font>\n***\n"
+            tmp += f"### {k}\n<font color={random_color()}>天气: {v[0]}&nbsp;&nbsp;&nbsp;当前温度: {v[1]}℃&nbsp;&nbsp;&nbsp;最低温: {v[2]}℃&nbsp;&nbsp;&nbsp;最高温: {v[3]}℃</font>\n***\n"
     tmp += f"### 今日彩虹屁\n<font color={random_color()}>{pi}</font>\r***\n### 今日段子\n<font color={random_color()}>{duanzi}</font>"
-    msg_text = f"***\n"
+    msg_text = f"今天是&nbsp;&nbsp;<font color={random_color()}>{today}</font>&nbsp;&nbsp;<font color={random_color()}>{get_week_day()}</font>\n***\n"
     msg_text += tmp
     msg.send_markdown(title="钉钉乐温馨提示", text=msg_text, is_at_all=False)
 
