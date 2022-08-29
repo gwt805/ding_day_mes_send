@@ -7,7 +7,7 @@ Markdown 字体颜色
 <font color="#660000">深红色文字</font>
 
 内容:
-    今天是 xxxx-xx-xx 星期x
+    现在是 xxxx-xx-xx 星期x
     今日天气 : 多云
     当前温度 : xx℃
     最低温   : xx℃
@@ -94,7 +94,7 @@ def main():
         for k, v in t.items():
             tmp += f"### {k}\n<font color={random_color()}>天气: {v[0]}&nbsp;&nbsp;&nbsp;当前温度: {v[1]}℃&nbsp;&nbsp;&nbsp;最低温: {v[2]}℃&nbsp;&nbsp;&nbsp;最高温: {v[3]}℃</font>\n***\n"
     tmp += f"### 今日彩虹屁\n<font color={random_color()}>{pi}</font>\r***\n### 今日段子\n<font color={random_color()}>{duanzi}</font>"
-    msg_text = f"今天是&nbsp;&nbsp;<font color={random_color()}>{today}</font>&nbsp;&nbsp;<font color={random_color()}>{get_week_day()}</font>\n***\n"
+    msg_text = f"### 现在是&nbsp;&nbsp;<font color={random_color()}>{today}</font>&nbsp;&nbsp;<font color={random_color()}>{get_week_day()}</font>\n***\n"
     msg_text += tmp
     msg.send_markdown(title="钉钉乐温馨提示", text=msg_text, is_at_all=False)
 
