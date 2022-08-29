@@ -34,7 +34,7 @@ webhook_url = os.getenv("WEBHOOK")
 qian_key = os.getenv("QIAN")
 
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
-today = datetime.strptime(str(nowtime.date()), "%Y-%m-%d")  # 今天的日期
+today = str(nowtime.year) + "-" +str(nowtime.month) + "-" + str(nowtime.day) +"&nbsp;&nbsp" + str(nowtime.hour) + ":" + str(nowtime.minute) + ":" + str(nowtime.second)  # 今天的日期
 
 
 def random_color():
