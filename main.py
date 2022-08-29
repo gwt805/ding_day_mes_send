@@ -34,7 +34,7 @@ webhook_url = os.getenv("WEBHOOK")
 qian_key = os.getenv("QIAN")
 
 nowtime = datetime.utcnow() + timedelta(hours=8)  # 东八区时间
-today = str(nowtime.year) + "-" +str(nowtime.month) + "-" + str(nowtime.day) +"&nbsp;&nbsp" + str(nowtime.hour) + ":" + str(nowtime.minute) + ":" + str(nowtime.second)  # 今天的日期
+today = str(nowtime.year) + "-" +str(nowtime.month) + "-" + str(nowtime.day) +" " + str(nowtime.hour) + ":" + str(nowtime.minute) + ":" + str(nowtime.second)  # 今天的日期
 
 
 def random_color():
@@ -60,7 +60,7 @@ def get_weather():
 
 def get_week_day():
     week_list = ["星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"]
-    week_day = week_list[datetime.date(today).weekday()]
+    week_day = week_list[datetime.date(datetime.strptime(today, "%Y-%m-%d %H:%M:%S")).weekday()]
     return week_day
 
 
