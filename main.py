@@ -106,7 +106,7 @@ def main():
         for k, v in t.items():
             tmp += f"### {k}\n<font color={random_color()}>天气: {v[0]}&nbsp;&nbsp;&nbsp;当前温度: {v[1]}℃&nbsp;&nbsp;&nbsp;最低温: {v[2]}℃&nbsp;&nbsp;&nbsp;最高温: {v[3]}℃</font>\n***\n"
     tmp += f"### 今日彩虹屁\n<font color={random_color()}>{pi}</font>\n***\n### 今日段子\n<font color={random_color()}>{duanzi}</font>\n***\n### 验收情况\n"
-    msg_text = f"### 现在是&nbsp;&nbsp;<font color={random_color()}>{today}</font>&nbsp;&nbsp;<font color={random_color()}>{get_week_day()}</font>"
+    msg_text = f"### 现在是&nbsp;&nbsp;<font color={random_color()}>{today}</font>&nbsp;&nbsp;<font color={random_color()}>{get_week_day()}</font>\n"
     msg_text += tmp + get_annos() # get_annos() 非人人适用，可注释掉
     msg.send_markdown(title="钉钉乐温馨提示", text=msg_text, is_at_all=False)
 
