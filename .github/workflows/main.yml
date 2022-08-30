@@ -26,3 +26,4 @@ jobs:
       CITYS: ${{ secrets.CITYS }}
       WEBHOOK: ${{ secrets.WEBHOOK }}
       QIAN: ${{ secrets.QIAN }}
+      ANNOS: ${{ secrets.ANNOS }}
