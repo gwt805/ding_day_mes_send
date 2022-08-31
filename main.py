@@ -49,11 +49,11 @@ def random_color():
 def get_weather():
     weather_list = []
     for ct in city.split(","):
-        url = "http://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city=" + ct
+        url = f"https://autodev.openspeech.cn/csp/api/v2.1/weather?openId=aiuicus&clientType=android&sign=android&city={ct}&needMoreData=true&pageNo=1&pageSize=1"
         res = requests.get(url).json()
         if res is None:
             return None
-        weather = res['data']['list'][0]
+        weather = res["data"]["list"][0]
         weather_list.append({ct: [weather["weather"], weather["temp"],
                             weather["low"], weather["high"]]})  # 天气，温度， 最低温，最高温
     return weather_list
@@ -74,7 +74,13 @@ def get_caihongpi():
     duanzi = duanzi_html[kaishi:end]
     return pi, duanzi
 
-
+"""
+为 "None"时 不用'，'
+非 "None"时, 只有1条或2条数据时最后需要加上 '，'
+eg1: 123，
+eg2: 123，456，
+eg3: 123,456,789
+"""
 def get_annos():  # 非人人适用，可注释掉
     if anno != "None":
         tmp = ""
@@ -82,9 +88,11 @@ def get_annos():  # 非人人适用，可注释掉
         if len(anno_split) != 2:
             for idx in anno_split:
                 tmp += f"\n<font color={random_color()}>{idx}</font>\n"
+        else:
+            tmp += f"\n<font color={random_color()}>{anno_split[0]}</font>\n"
         return tmp
     else:
-        return f"\n<font color={random_color()}>Author休假中,上班后同步</font>"
+        return f"\n<font color={random_color()}>Author休假中,上班后同步...</font>"
 
 def main():
     pi, duanzi = get_caihongpi()
