@@ -13,7 +13,6 @@
 
 ## 环境
     python >= 3.6
-    DingtalkChatbot==1.5.3
     requests==2.25.1
 
 ## 其他
