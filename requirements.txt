@@ -1,2 +1,2 @@
 DingtalkChatbot==1.5.3
-requests==2.3.0
+requests==2.30.0
